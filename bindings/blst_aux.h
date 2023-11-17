@@ -114,4 +114,6 @@ size_t blst_fp12_sizeof(void);
  * Single-shot SHA-256 hash function.
  */
 void blst_sha256(byte out[32], const byte *msg, size_t msg_len);
+void blst_sha256_block(uint32_t* h, const void* in, size_t blocks);
+void blst_sha256_emit(uint8_t *md, const uint32_t *h);
 #endif

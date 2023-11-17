@@ -25,6 +25,17 @@ void sha256_block_data_order(unsigned int *h, const void *inp, size_t blocks);
 void sha256_hcopy(unsigned int dst[8], const unsigned int src[8]);
 void sha256_bcopy(void *dst, const void *src, size_t len);
 
+void blst_sha256_block(unsigned int* h, const void* in, size_t blocks) {
+#if (defined(__x86_64__) || defined(__x86_64) || defined(_M_X64)) && defined(__SHA__)
+# define blst_sha256_block_inner blst_sha256_block_data_order_shaext
+#elif defined(__aarch64__) && defined(__ARM_FEATURE_CRYPTO)
+# define blst_sha256_block_inner blst_sha256_block_armv8
+#else
+# define blst_sha256_block_inner blst_sha256_block_data_order
+#endif
+    blst_sha256_block_inner(h, in, blocks);
+}
+
 /*
  * If SHA256_CTX conflicts with something, just redefine it to alternative
  * custom name prior including this header.

@@ -35,7 +35,8 @@ done
 
 if which bindgen > /dev/null 2>&1; then
   ( cd ../bindings; set -x;
-    bindgen --opaque-type blst_pairing \
+    bindgen --use-core \
+            --opaque-type blst_pairing \
             --opaque-type blst_uniq \
             --with-derive-default \
             --with-derive-eq \

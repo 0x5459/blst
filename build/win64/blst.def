@@ -218,4 +218,6 @@ EXPORTS
 	blst_p2_affine_sizeof
 	blst_fp12_sizeof
 	blst_sha256
+	blst_sha256_block
+	blst_sha256_emit
 
